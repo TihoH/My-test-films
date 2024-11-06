@@ -1,0 +1,19 @@
+.footer{
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    color: #76757B;
+    transition: 0.5s;
+}
+.item_list{
+    color: white;
+    font-size: 20px;  
+    margin-bottom: 10px;      
+}
+.list a:hover {
+    color: #e2e2e2;
+}

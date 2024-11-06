@@ -1,0 +1,191 @@
+.aboutFilm{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  min-height: 100vh;
+padding: 20px 20px; 
+border-bottom: 1px solid rgb(5, 78, 5);
+border-top: 1px solid rgb(5, 78, 5);
+}
+.preview_photo {
+  min-width: 40%;
+
+  img {
+    max-height:  600px;
+    width: 100%;
+    // object-position: center;
+    object-fit: cover;
+    position: sticky;
+    top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 3px gray;
+  }
+}
+.about_wrapper {
+  width: 100%;
+
+}
+.bgFon{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(16,14,25,0.8);
+  z-index: 100;
+}
+.productionFilm li:not(:last-child)::after{
+  content: ' , ';
+  display: block;
+  padding: 0 5px;
+
+}
+.aboutFilm_container{
+  display: flex;
+  gap: 20px;
+  z-index: 1000;
+}
+.aboutFilm_person {
+  width: 100%;
+
+  .persons {
+    display: grid;
+    grid-template-columns: repeat( 9 , 1fr  );
+    gap: 20px;
+    padding: 20px 0;
+
+    li {
+      font-size: 12px;
+
+      img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+}
+// .persons li:last-child{
+//     background-color: #1F1B2E;
+//     height: 80px;
+//     border-radius: 20px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     transition: 1s;
+//     cursor: pointer;
+
+//     button{
+//         font-size: 18px;
+//     }
+// }
+
+// .persons li:last-child:hover{
+//     background-color: #312B45;
+// }
+.currentFilm_rating {
+  display: flex;
+  gap: 20px;
+
+  p {
+    height: 70px;
+    width: 70px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-weight: 700;
+    border-bottom: 1px solid rgb(5, 78, 5);
+    border-top: 1px solid rgb(5, 78, 5);
+  }
+}
+// Comments
+
+.aboutFilm_sectionComments {
+  min-height: 400px;
+  margin-top: 10px;
+}
+
+// CurrentFilm siquel
+.CurrentFilm_sequel_wrapper {
+    margin: 20px 0;
+    height: 300px;
+  background: rgb(16, 14, 25);
+  background: linear-gradient(
+    90deg,
+    rgba(16, 14, 25, 1) 15%,
+    rgba(26, 24, 39, 0.8632703081232493) 39%,
+    rgba(26, 24, 39, 0.8688725490196079) 67%,
+    rgba(16, 14, 25, 1) 87%
+  );
+  border: 1px solid #054E05;
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+
+  h3{
+    padding-left: 275px;
+  }
+}
+.CurrentFilm_sequel_wrapperList {
+  width: 100%;
+
+  li{
+    padding-left: 275px;
+    z-index: 100;
+  }
+  
+  li:hover{
+    background-color: rgb(27, 27, 27);
+    padding-left: 275px;
+
+  }
+  li:hover .CurrentFilm_sequel_ShowImage {
+    opacity: 1;
+    z-index: 1000;
+    transition: 0.3s;
+  }
+}
+.active{
+  background-color: rgb(27, 27, 27);
+  padding-left: 275px;
+  opacity: 1;
+}
+.disabledActive{
+  background-color: transparent;
+}
+.CurrentFilm_sequel_ShowImage{
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+.CurrentFilm_sequelImage {
+  max-height: 100%;
+  height: 100%;
+  object-fit: cover;
+  width: 250px;
+  border-radius: 10px;
+}
+.CurrentFilm_sequel_titlePhoto{
+  height: 100%;
+  object-fit: cover;
+  width: 250px;
+  border-radius: 10px;
+}
+// CurrentFilm_sequel_titlePhoto
+
+// About Film iframe video
+.aboutFilm_iframe {
+  width: 100%;
+  height: 400px;
+}
