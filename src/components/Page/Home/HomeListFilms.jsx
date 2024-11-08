@@ -3,8 +3,7 @@ import SliderHomeListFilms from "../../Slider/HomeListFilms/SliderHomeListFilms"
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-const HomeListFilms = ({ title, dataList, type, setDataType }) => {
-  // const [typeDateFilms , setTypeDateFilms] = useState(type)
+const HomeListFilms = ({ title, dataList, type, setDataType , genres}) => {
 
   return (
     <div>
@@ -29,7 +28,7 @@ const HomeListFilms = ({ title, dataList, type, setDataType }) => {
       ) : (
         ""
       )}
-      <SliderHomeListFilms dataList={dataList} type={type} />
+      <SliderHomeListFilms dataList={dataList} type={type} genres={genres} />
     </div>
   );
 };

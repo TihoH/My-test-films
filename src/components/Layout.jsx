@@ -13,7 +13,7 @@ const Layout = () => {
       <header className="container">
         <Header />
       </header>
-      <main className={ location.pathname === '/' || location.pathname === `/AboutFilm/Type/${type}/${id}` ? '' : 'container'   }>
+      <main className={ location.pathname === '/' || location.pathname === `/AboutFilm/type/${type}/${id}` ? '' : 'container'   }>
         <Outlet />
       </main>
       <footer className="container">

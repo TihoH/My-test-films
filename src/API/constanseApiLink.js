@@ -19,14 +19,11 @@ export const BestRating = {
     description: 'получение фильмов с лучшим рейтингом '
 }
 export const getWatchingNowPlay = {
-    // https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1
     getFunctionApi: function( typeDateFilms){
         if(typeDateFilms === 'tv'){
-            console.log(typeDateFilms)
                 return `https://api.themoviedb.org/3/tv/airing_today?language=ru&page=1`
                 
         }else{
-            console.log(typeDateFilms)
             return (`https://api.themoviedb.org/3/${'movie'}/now_playing?language=en-ru&page=1`)
         }
         

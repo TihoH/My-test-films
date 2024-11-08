@@ -9,11 +9,6 @@ const CurrentFilmSequel = ({ currentFilmSequelArr, currentFilm , currentFilmColl
     return
   }
 
-  // function sliceData(release_date){
-  //   const newData = release_date.slice(0 , 4)
-  //   return newData
-  // }
-
   return (
     <div className={clases.CurrentFilm_sequel_wrapper}>
       <h3 className="text-3xl"> Все части фильма </h3>
@@ -22,7 +17,7 @@ const CurrentFilmSequel = ({ currentFilmSequelArr, currentFilm , currentFilmColl
           {currentFilmSequelArr?.map((item, index) => (
             <NavLink
               key={index}
-              to={`/AboutFilm/Type/${type}/` + item.id}
+              to={`/AboutFilm/type/${type}/` + item.id}
             >
               <li className={"w-full py-1 "}>
                 {currentFilmCollactionId != item.id ? (

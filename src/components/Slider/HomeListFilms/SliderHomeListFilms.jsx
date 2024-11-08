@@ -9,8 +9,10 @@ import "swiper/css/pagination";
 // import required modules
 import { Pagination } from "swiper/modules";
 import { NavLink } from "react-router-dom";
+import { sortNameganresItem } from "../../../API/ApiFunctions";
 
-const SliderHomeListFilms = ({ dataList , type}) => {
+const SliderHomeListFilms = ({ dataList, type, genres }) => {
+
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
@@ -20,13 +22,9 @@ const SliderHomeListFilms = ({ dataList , type}) => {
   return (
     <>
       <Swiper
-        // pagination={pagination}
         modules={[Pagination]}
         slidesPerView={1}
         spaceBetween={10}
-        // pagination={{
-        //   clickable: true,
-        // }}
         breakpoints={{
           "@0.00": {
             slidesPerView: 2,
@@ -48,42 +46,45 @@ const SliderHomeListFilms = ({ dataList , type}) => {
         className={clases.swiper}
       >
         {dataList.map((itemList, index) => (
-          <SwiperSlide key={index} className={ itemList ?  clases.SwiperSlide : clases.SwiperSlideSkeleton}>
-            <NavLink to={`/AboutFilm/Type/${'Movie'}/` + itemList.id} className='h-full'>
+          <SwiperSlide
+            key={index}
+            className={
+              itemList ? clases.SwiperSlide : clases.SwiperSlideSkeleton
+            }
+          >
+            <NavLink
+              to={`/AboutFilm/type/${"movie"}/` + itemList.id}
+              className="h-full"
+            >
               <div className={clases.swiper_images}>
-                
-                <img src={ 'https://image.tmdb.org/t/p/w500/' + itemList.poster_path } alt="" />
+                <img
+                  src={
+                    "https://image.tmdb.org/t/p/w500/" + itemList.poster_path
+                  }
+                  alt=""
+                />
               </div>
               <div className={clases.swiperSlide_hoverAbout}>
                 <div className={clases.swiper_about}>
-                  <span className="text-text-color">Name:</span>
-                  <span> {itemList.title}</span>
+                  <span>{itemList.name || itemList.title}</span>
                 </div>
                 <div className={clases.swiper_about}>
                   <span className="text-text-color">Год:</span>
-                  <span> {itemList.release_date }</span>
+                  <span> {itemList.release_date}</span>
                 </div>
-                {/* { itemList.genres ?  <div className={clases.swiper_about}>
-                  <span className="text-text-color flex  gap-2">Жанр </span>:
-                  {itemList?.genres?.map((genre, index) => (
-                    <span key={index}>{genre.name}</span>
-                  ))}{" "}
-                </div> : '' }
-                
-                  {itemList.rating ?   <div className={clases.swiper_about}>
-                  <span className="text-text-color">Рейтинг:</span>
-                  <div className="flex flex-col">
-                    {itemList?.rating.filmCritics != 0 ? (
-                      <span>filmCritics: {itemList?.rating.filmCritics}</span>
-                    ) : null}
-                    {itemList?.rating.imdb != 0 ? (
-                      <span>imdb: {itemList?.rating.imdb}</span>
-                    ) : null}
-                    {itemList?.rating.kp != 0 ? (
-                      <span>kp: {itemList?.rating.kp}</span>
-                    ) : null}
-                  </div>
-                </div> : null} */}
+
+                <div className=" flex gap-2 flex-wrap p-1">
+                  <span
+                    className={`${clases.sliderListFilms_genre} text-text-color`}
+                  >
+                    Жанр{" "}
+                  </span>:
+                  {sortNameganresItem(itemList.genre_ids, genres)?.map(
+                    (genre, index) => (
+                      <span key={index}>{genre},</span>
+                    )
+                  )}{" "}
+                </div>
               </div>
             </NavLink>
             <h2 className="mt-1 text-text-color "> {itemList.title}</h2>

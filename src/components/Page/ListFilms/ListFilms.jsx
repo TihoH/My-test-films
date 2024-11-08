@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getCategories, getGenre } from "../../../API/getFilms";
+import { getCategories, getGenre, key } from "../../../API/getFilms";
 import clases from "./ListFilms.module.scss";
 import { NavLink } from "react-router-dom";
 import SortItem from "../../Sort/SortItem";
-import { getTypeGanre } from "../../../API/ApiFunctions";
+import { getTypeGanre, sortNameganresItem } from "../../../API/ApiFunctions";
 import { sliceData } from "../../../API/functionByApi";
-// import {
-//   MdOutlineKeyboardDoubleArrowRight,
-//   MdOutlineKeyboardDoubleArrowLeft,
-// } from "react-icons/md";
-import Pagonation from '../../UI/Pagination/Pagination'
+
+import Pagonation from "../../UI/Pagination/Pagination";
 
 const CurrentCategories = () => {
   const { type, id } = useParams();
@@ -19,6 +16,7 @@ const CurrentCategories = () => {
   const [genreSortData, setGenreSortData] = useState([]);
   const [defaultYaer, setDefaultYaer] = useState(undefined);
   const [sortRating, setSortRating] = useState({ name: "", sort: "" });
+  const [genres, setGenres] = useState([]);
 
   const getCategoriesFilms = async (id, pageFilms, type, defaultYaer) => {
     const response = await getCategories(id, pageFilms, type, defaultYaer);
@@ -46,6 +44,7 @@ const CurrentCategories = () => {
   useEffect(() => {
     getCategoriesFilms(id, pageFilms, type, defaultYaer);
     getTypeGanre(setGenreSortData, type);
+    getTypeGanre(setGenres, type);
   }, [id, pageFilms, type, defaultYaer]);
   return (
     <div
@@ -83,7 +82,7 @@ const CurrentCategories = () => {
         ) : (
           <ul className={clases.categories_list}>
             {filmsCategory?.map((item) => (
-              <NavLink key={item.id} to={`/AboutFilm/Type/${type}/` + item.id}>
+              <NavLink key={item.id} to={`/AboutFilm/type/${type}/` + item.id}>
                 <div className="relative">
                   <li key={item.id}>
                     <div className={clases.categories_photo}>
@@ -95,7 +94,7 @@ const CurrentCategories = () => {
                       />
                     </div>
                     <div className={clases.hover_styleNameEndAboutFilms}>
-                      <h2 className="text-center w-full mt-2 text-text-color">
+                      <h2 className="flex items-center justify-center  font-thin w-full mt-2 text-text-color">
                         {item.title || item.name}
                       </h2>
                     </div>
@@ -104,15 +103,28 @@ const CurrentCategories = () => {
                         <span className="text-text-color">id</span>
                         <span> : {item.id}</span>
                       </div>
-                      <div className=" flex gap-2 flex-wrap">
-                        <span className="text-text-color">Жанр </span>:
-                        {item?.genre_ids?.map((genre, index) => (
-                          <span key={index}>{genre},</span>
-                        ))}{" "}
-                      </div>
+                      <div className=" flex gap-2 flex-wrap p-1">
+                  <span
+                    className={`${clases.sliderListFilms_genre} text-text-color`}
+                  >
+                    Жанр{" "}
+                  </span>
+                  :
+                  {sortNameganresItem(item.genre_ids, genres)?.map(
+                    (genre, index) => (
+                      <span key={index}>{genre},</span>
+                    )
+                  )}{" "}
+                </div>
                       <div>
                         <span className="text-text-color">Год:</span>
-                        <span> : { item.release_date ?  sliceData(item.release_date) : ''}</span>
+                        <span>
+                          {" "}
+                          :{" "}
+                          {item.release_date
+                            ? sliceData(item.release_date)
+                            : ""}
+                        </span>
                       </div>
                     </div>
                   </li>

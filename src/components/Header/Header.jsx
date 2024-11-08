@@ -25,7 +25,7 @@ const Header = () => {
     },
     {
       title: "Фильмы",
-      type: "Movie",
+      type: "movie",
       activeHover: true,
       link: true,
       onMouseMove: () => setIsActiveHoverMenu(false),
@@ -48,7 +48,7 @@ const Header = () => {
   ];
 
   useEffect(() => {
-    getTypeGanre(setGenre, "Movie");
+    getTypeGanre(setGenre, "movie");
   }, []);
 
   return (
@@ -139,7 +139,7 @@ const Header = () => {
         />
       </div>
       <Modal setIsActiveModal={setIsActiveModal} isActiveModal={isActiveModal}>
-        <SearchFilms isActiveModal={isActiveModal} />
+        <SearchFilms isActiveModal={isActiveModal} setIsActiveModal={setIsActiveModal} />
       </Modal>
     </div>
   );

@@ -8,8 +8,6 @@ import { NavLink } from "react-router-dom";
 const SortItem = ({ title, dataSort , typeSort , setData , sortRating}) => {
   const { categories , type , id} = useParams();
 
-  console.log(type)
-
   return (
     <div className={clases.sortItem}>
       <p className={clases.sortItem_title}>{ title?.name ? title.name : title }</p>
@@ -23,9 +21,9 @@ const SortItem = ({ title, dataSort , typeSort , setData , sortRating}) => {
               key={index}
               onClick={() =>
                 setData( typeSort === 'rating' ?  {...sortRating , name: data.name , sort: data.sort} : data.name ) ||
-                console.log(data.name)
+                ''
               }
-              to={ typeSort != 'yaers' ? `/Type/${typeSort}/` + data.id : '' }
+              to={ typeSort != 'yaers' ? `/type/${typeSort}/` + data.id : '' }
               // to={
               //   typeSort === "categories" ? `/CurrentCategories/${type}/${data.name}` : null
               // }

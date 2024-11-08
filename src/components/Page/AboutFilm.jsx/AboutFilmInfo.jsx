@@ -35,10 +35,6 @@ const AboutFilmInfo = ({ currentFilm, dataVideo }) => {
               </div>
             </div>
             <div>
-              {/* <div className="text-lg">
-                <span className="text-text-color">название</span>
-                <span> : {currentFilm.name}</span>
-              </div> */}
               <div>
                 <span className="text-text-color">ID</span>
                 <span> : {currentFilm.id}</span>
@@ -63,10 +59,6 @@ const AboutFilmInfo = ({ currentFilm, dataVideo }) => {
                     ))
                   : "непоняика"}
               </ul>
-              {/* <div>
-                <span className="text-text-color">Тип</span>
-                <span> : {currentFilm.type}</span>
-              </div> */}
               <div>
                 <span className="text-text-color">Продолжительность</span>
                 <span>
@@ -77,26 +69,6 @@ const AboutFilmInfo = ({ currentFilm, dataVideo }) => {
                   мин
                 </span>
               </div>
-              {/* <div>
-                <span className="text-text-color">Премьера в мире</span>
-                <span>
-                  {" "}
-                  :{" "}
-                  {currentFilm.premiere
-                    ? new Date(
-                        currentFilm?.premiere?.world
-                      ).toLocaleDateString()
-                    : "не указано"}{" "}
-                </span>
-              </div> */}
-              {/* <div>
-                <span className="text-lg mr-2 text-text-color">Возраст:</span>
-                <span>
-                  {currentFilm.ageRating
-                    ? currentFilm.ageRating + "+"
-                    : "Описание не найдено"}
-                </span>
-              </div> */}
               <ul
                 className={`${clases.productionFilm} flex items-center flex-wrap`}
               >

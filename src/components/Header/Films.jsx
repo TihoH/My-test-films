@@ -16,7 +16,7 @@ const Films = ({ ganre, isActiveHoverMenu, setIsActiveHoverMenu  , typeLink }) =
         {ganre?.map((film, index) => (
           <NavLink
             key={index}
-            to={`Type/Movie/` + film.id}
+            to={`type/movie/` + film.id}
             onClick={() => setIsActiveHoverMenu(false)}
           >
             <li className="">{film.name}</li>

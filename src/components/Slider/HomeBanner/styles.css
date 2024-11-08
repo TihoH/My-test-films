@@ -44,8 +44,8 @@
     border-radius: 17px;
   }
   .swiper{
-    height: 600px;
+    max-height: 500px;
   }
-.banner-wrapper{
+/* .banner-wrapper{
   height: 700px;
-}
+} */

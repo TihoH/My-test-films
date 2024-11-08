@@ -27,7 +27,7 @@ export default function App({ dataFilms , type }) {
     >
       {dataFilms?.map((film) => (
         <SwiperSlide key={film.id} className={"relative "}>
-          <NavLink to={`/AboutFilm/Type/${type}/` + film.id}>
+          <NavLink to={`/AboutFilm/type/${type}/` + film.id}>
             <div className={"swiperSlide_name"}>
               <span>{film?.title}</span>
               <span className="text-red-500">Смотреть</span>
