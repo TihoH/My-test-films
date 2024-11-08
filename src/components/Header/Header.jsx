@@ -95,15 +95,6 @@ const Header = () => {
         </ul>
       </div>
       <div className="flex items-center justify-end w-1/2 gap-6">
-        {/* <div>
-          <Link
-            className={
-              "px-4 py-3 bg-red-600 hover:bg-red-800 text-white text-sm rounded-md transition"
-            }
-          >
-            Смотреть 60 дней бесплатно
-          </Link>
-        </div> */}
         <div className="flex text-lg">
           <button
             type="button"
