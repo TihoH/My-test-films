@@ -59,6 +59,7 @@ const SearchFilms = ({ setIsActiveModal }) => {
               ]}
               setCurrentTypeSearch={setCurrentTypeSearch}
               currentTypeSearch={currentTypeSearch}
+              setPageLimit={setPageLimit}
             />
           </div>
           <span onClick={() => closeModal()}>
@@ -97,7 +98,7 @@ const SearchFilms = ({ setIsActiveModal }) => {
         <div>
           <button
             className="w-full border border-gray-500 py-2 rounded-md hover:bg-black hover:text-white transition mt-20"
-            onClick={() => setPageLimit(pageLimit + 10)}
+            onClick={() => setPageLimit(pageLimit + 1)}
           >
             Показать больше
           </button>

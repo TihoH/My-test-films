@@ -1,4 +1,5 @@
 
+import { getFilmIdVideo } from "./constanseApiLink";
 import { getDataById, getGenre } from "./getFilms";
 
 export async function FunctionGetData( setData ,  id , apiFunction , type ){
@@ -10,6 +11,15 @@ export async function FunctionGetData( setData ,  id , apiFunction , type ){
 export async function getTypeGanre(setData , type ){
   const response = await getGenre(type);
   setData(response.genres)
+}
+export async function getTraillerFilm(setData ,getFilmIdVideo , type , id ){
+  // const response = await getGenre(type);
+  // setData(response.genres)
+  const response = await getDataById(id, getFilmIdVideo , type);
+  const findOfficial = response.results.find(
+    (item) => item.type === "Trailer"
+  );
+  setData(findOfficial);
 }
   
 

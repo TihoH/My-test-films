@@ -1,30 +1,30 @@
-import React, { useRef, useState } from "react";
-// import "./styles.scss";
+import React, { useRef } from "react";
 import clases from "./styles.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 
-// Import Swiper styles
 import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css";
 
-// import required modules
 import { Pagination } from "swiper/modules";
 import { NavLink } from "react-router-dom";
 import { sortNameganresItem } from "../../../API/ApiFunctions";
 
-const SliderHomeListFilms = ({ dataList, type, genres }) => {
-
-  const pagination = {
-    clickable: true,
-    renderBullet: function (index, className) {
-      return '<span class="' + className + '">' + (index + 1) + "</span>";
-    },
-  };
+const SliderHomeListFilms = ({ dataList, genres, swiperref , type}) => {
+  console.log(type)
   return (
     <>
       <Swiper
-        modules={[Pagination]}
+        modules={[Pagination, Navigation]}
         slidesPerView={1}
         spaceBetween={10}
+        // navigation={true}
+        // loop = {true}
+
+        onSwiper={(swiper) => (swiperref.current = swiper)}
+        // pagination={{ clickable: true }}
+        className={`${clases.swiper}`}
         breakpoints={{
           "@0.00": {
             slidesPerView: 2,
@@ -39,11 +39,10 @@ const SliderHomeListFilms = ({ dataList, type, genres }) => {
             spaceBetween: 40,
           },
           "@1.50": {
-            slidesPerView: 7,
+            slidesPerView: 6,
             spaceBetween: 20,
           },
         }}
-        className={clases.swiper}
       >
         {dataList.map((itemList, index) => (
           <SwiperSlide
@@ -53,7 +52,7 @@ const SliderHomeListFilms = ({ dataList, type, genres }) => {
             }
           >
             <NavLink
-              to={`/AboutFilm/type/${"movie"}/` + itemList.id}
+              to={`/AboutFilm/type/${type === 'tv' || type === 'Tv-serials' ? 'Tv-serials' : 'movie'}/` + itemList.id}
               className="h-full"
             >
               <div className={clases.swiper_images}>
@@ -65,7 +64,8 @@ const SliderHomeListFilms = ({ dataList, type, genres }) => {
                 />
               </div>
               <div className={clases.swiperSlide_hoverAbout}>
-                <div className={clases.swiper_about}>
+                <div className={`${clases.swiper_about} text-center `}>
+         
                   <span>{itemList.name || itemList.title}</span>
                 </div>
                 <div className={clases.swiper_about}>
@@ -73,21 +73,22 @@ const SliderHomeListFilms = ({ dataList, type, genres }) => {
                   <span> {itemList.release_date}</span>
                 </div>
 
-                <div className=" flex gap-2 flex-wrap p-1">
-                  <span
-                    className={`${clases.sliderListFilms_genre} text-text-color`}
-                  >
-                    Жанр{" "}
-                  </span>:
-                  {sortNameganresItem(itemList.genre_ids, genres)?.map(
-                    (genre, index) => (
-                      <span key={index}>{genre},</span>
-                    )
-                  )}{" "}
+                <div className="flex gap-1">
+                  <ul className="listDataApi  flex-wrap ">
+                  <li className={` text-text-color`}>Жанр:</li>
+                    {sortNameganresItem(itemList.genre_ids, genres)?.map(
+                      (genre, index) => (
+                        <li key={index}>{genre}</li>
+                      )
+                    )}{" "}
+                  </ul>
                 </div>
               </div>
             </NavLink>
-            <h2 className="mt-1 text-text-color "> {itemList.title}</h2>
+            <h2 className="mt-1 text-text-color text-center">
+              {" "}
+              {itemList.title}
+            </h2>
           </SwiperSlide>
         ))}
       </Swiper>

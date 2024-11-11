@@ -7,14 +7,15 @@ import clases from "./Header.module.css";
 import Modal from "../ModalWindow/Modal";
 import SearchFilms from "../SearchFilms/SearchFilms";
 import { getTypeGanre } from "../../API/ApiFunctions";
+import { useGetGanres } from "../../API/hooks/useGetGanre";
 
 const Header = () => {
   const [isActiveHoverMenu, setIsActiveHoverMenu] = useState(false);
-  const [ganre, setGenre] = useState([]);
+  // const [ganre, setGenre] = useState([]);
   const [isActiveModal, setIsActiveModal] = useState(false);
   const [typeLink, setTypeLink] = useState("");
   const { type } = useParams();
-
+  const {data} = useGetGanres(type)  
   const headerLinks = [
     {
       title: "Главная",
@@ -47,9 +48,9 @@ const Header = () => {
     },
   ];
 
-  useEffect(() => {
-    getTypeGanre(setGenre, "movie");
-  }, []);
+  // useEffect(() => {
+  //   getTypeGanre(setGenre, "movie");
+  // }, []);
 
   return (
     <div
@@ -123,7 +124,7 @@ const Header = () => {
       </div>
       <div>
         <Films
-          ganre={ganre}
+          ganre={data}
           isActiveHoverMenu={isActiveHoverMenu}
           setIsActiveHoverMenu={setIsActiveHoverMenu}
           typeLink={typeLink}

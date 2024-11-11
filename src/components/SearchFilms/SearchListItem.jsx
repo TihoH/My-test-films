@@ -9,10 +9,10 @@ const SearchListItem = ({ searchItem }) => {
           src={" https://image.tmdb.org/t/p/w500/" + searchItem.poster_path}
           alt=""
         />
-         <h6>{searchItem.title}</h6>
+         <h6>{searchItem.title || searchItem.name}</h6>
         <div className={clases.showInfoItemList}>
           <span>Дата выпуска: </span>
-          <span>{searchItem?.release_date}</span>
+          <span>{searchItem?.release_date || searchItem.first_air_date}</span>
         </div>
       </div>
     </div>

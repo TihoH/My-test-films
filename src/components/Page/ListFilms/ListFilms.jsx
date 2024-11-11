@@ -17,11 +17,16 @@ const CurrentCategories = () => {
   const [defaultYaer, setDefaultYaer] = useState(undefined);
   const [sortRating, setSortRating] = useState({ name: "", sort: "" });
   const [genres, setGenres] = useState([]);
+  const [totalPages , setTotalPages] = useState() 
 
   const getCategoriesFilms = async (id, pageFilms, type, defaultYaer) => {
     const response = await getCategories(id, pageFilms, type, defaultYaer);
     setFilmsCategory(response.results);
+    setTotalPages(response.total_pages)
+    console.log(totalPages)
   };
+
+
 
   function sortNameGanre(id) {
     if (id) {
@@ -88,13 +93,13 @@ const CurrentCategories = () => {
                     <div className={clases.categories_photo}>
                       <img
                         src={
-                          `http://image.tmdb.org/t/p/w500/` + item.poster_path
+                          `http://image.tmdb.org/t/p/w500/` + item.poster_path || backdrop_path
                         }
                         alt={`photo - ${item.id}`}
                       />
                     </div>
                     <div className={clases.hover_styleNameEndAboutFilms}>
-                      <h2 className="flex items-center justify-center  font-thin w-full mt-2 text-text-color">
+                      <h2 className="flex  justify-center text-center  font-thin w-full mt-2 ">
                         {item.title || item.name}
                       </h2>
                     </div>
@@ -135,28 +140,7 @@ const CurrentCategories = () => {
         )}
       </div>
       <div className="flex justify-center items-center py-6 w-full ">
-        {/* <div>
-          <button type="button" className="text-5xl">
-            <MdOutlineKeyboardDoubleArrowLeft />
-          </button>
-        </div>
-        <button
-          type="button"
-          className="border border-gray-600 p-2 px-8  rounded-md hover:border-gray-300 transition text-lg mx-5"
-          onClick={() => setPageFilms(pageFilms + 1)}
-        >
-          Показать еще
-        </button>
-        <div>
-          <button
-            type="button"
-            className="text-5xl hover:text-green-800 transition-all hover:text-7xl "
-          >
-            <MdOutlineKeyboardDoubleArrowRight />
-          </button>
-        </div> */}
-        {/* <Pagination /> */}
-        <Pagonation />
+        <Pagonation totalPages={totalPages} setPageFilms={setPageFilms} pageFilms={pageFilms} />
       </div>
     </div>
   );

@@ -1,14 +1,16 @@
 import axios from "axios";
-import { getFilmCollaction } from "./constanseApiLink";
 import { sortApiType } from "./functionByApi";
 
-const API_KEY_1 = "PS7GEJ2-TXT4E0H-JJXDKK8-HY801SE";
 
-const apiKey = API_KEY_1;
-const NotApiKey2 = apiKey;
 
 export const key =
   "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZTg0MDliMGMwYjZkOTdjNzJiMGY1Y2E0YzRlMjQ4ZSIsIm5iZiI6MTczMDIxODE3Ni42NzU2MzEsInN1YiI6IjY3MjEwNjk2NGJlMTU0NjllNzBlNzkwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.G_9qTXnglvt51GT4xZH1qXPpimY-aFAmmle4FibAqT8";
+
+  export const getCommetnsJsonPlaceholder = async (randomNum) => {
+    return await axios(
+      `https://jsonplaceholder.typicode.com/comments?_limit=${randomNum}`,
+    );
+  };
 
   export async function getDataById(id , dataLink , type) {
 
@@ -24,6 +26,20 @@ export const key =
       console.log(error);
     }
   }
+
+  
+export const getActorsByFilm = async (id) => {
+  return await axios(
+    `https://api.themoviedb.org/3/movie/${id}/credits?language=ru`,
+    {
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZTg0MDliMGMwYjZkOTdjNzJiMGY1Y2E0YzRlMjQ4ZSIsIm5iZiI6MTczMTE1MTkyNS45MDE1OTY4LCJzdWIiOiI2NzIxMDY5NjRiZTE1NDY5ZTcwZTc5MGMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.lWmHYBGmiPyN3Wg8b0G4beGf2Y07RYiU0tNKFJP4swo",
+      },
+    }
+  );
+};
 
 
   export async function getDataByIdCollaction(id , dataLink) {
@@ -121,44 +137,3 @@ export async function getCategories(id , pageFilms , typeLink , defaultYaer) {
 }
 
 // END NEW
-
-export async function getProductionFilms() {
-  const response = await axios(
-    "https://api.kinopoisk.dev/v1.4/movie?page=1&notNullFields=backdrop.url&limit=10&networks.items.name=Netflix",
-    {
-      method: "GET",
-      headers: { accept: "application/json", "X-API-KEY": NotApiKey2 },
-    }
-  );
-  return response.data;
-}
-
-export async function getAllFilms(limit, currentTypeFilms) {
-  try {
-    const response = await axios(
-      `'https://api.kinopoisk.dev/v1.4/movie?page=1&${limit}&type=${currentTypeFilms}&`,
-      {
-        method: "GET",
-        headers: { accept: "application/json", "X-API-KEY": apiKey },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export async function getCommentsFilm(id, limitComments) {
-  try {
-    const response = await axios(
-      `https://api.kinopoisk.dev/v1.4/review?page=1&limit=${limitComments}&movieId=${id}`,
-      {
-        method: "GET",
-        headers: { accept: "application/json", "X-API-KEY": NotApiKey2 },
-      }
-    );
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-}

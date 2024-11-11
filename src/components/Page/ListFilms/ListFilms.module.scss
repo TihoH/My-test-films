@@ -15,13 +15,18 @@
 
     li{
         z-index: 100;
-        // height: 300px;
+        height: 300px;
         display: flex;
         flex-direction: column;
         padding: 3px;
         cursor: pointer;
         max-width: 100%;
         border-radius: 5px;
+        font-size: 14px;
+        
+        h2{
+            color: gray;
+        }
        
 
         img{
@@ -41,6 +46,10 @@
         z-index: 1100;
         min-width: 220px;
         height: auto;
+
+        h2{
+            color: white;
+        }
 
         img{
             object-fit: cover;
@@ -68,7 +77,7 @@
     border: 1px solid rgb(0, 73, 0);
 }
 .hover_styleNameEndAboutFilms{
-    min-height: 70px;
+    padding: 10px 0;
     display: flex;
 
 }
@@ -86,7 +95,7 @@ li:hover .hover_styleNameEndAboutFilms{
 .categories_list li:hover .hover_aboutItemCategories{
     height: 100%;
     display: block;
-
+    // border: 1px solid red;
 }
 // .listGanres{
 //     display: flex;
