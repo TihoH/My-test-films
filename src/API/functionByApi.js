@@ -7,10 +7,11 @@ export function sliceData(release_date){
 
   export function sortApiType(type){
     const apiType = [
-      {name: 'Movie' , typeLink: 'movie'} ,
+      {name: 'movie' , typeLink: 'movie'} ,
       {name: 'Tv-serials' , typeLink: 'tv'} ,
       {name: 'Мультфильмы' , typeLink: 'tv'} ,
     ]
+    
   
     const findApiType = apiType.find( item => item.name === type  ) 
     return findApiType.typeLink

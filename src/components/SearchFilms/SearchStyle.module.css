@@ -17,7 +17,6 @@
     /* color: #76756B; */
     max-width: 100%;
     position: relative;
-
     top: 0;
     left: 0;
     font-size: 14px;
@@ -37,7 +36,7 @@
     z-index: 2000;
     width: 100%;
     height: 100%;
-    background-color: #262236;
+    background-color: #302A44;
 }
 .myInputSearch input{
     background-color: white;

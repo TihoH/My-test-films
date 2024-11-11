@@ -12,6 +12,7 @@ import {
   NowPlaying,
 } from "../../../API/constanseApiLink";
 import HomeInfoFilms from "./HomeInfoFilms";
+import { getTypeGanre } from "../../../API/ApiFunctions";
 
 const Home = () => {
   const [popularFilmList, setPopularFilmList] = useState([]);
@@ -19,6 +20,7 @@ const Home = () => {
   const [nowPlaying, setNowPlaying] = useState([]);
   const [watchingNow, setWatchinNow] = useState([]);
   const [uppComming, setUppComming] = useState([]);
+  const [genres , setGenres] = useState([])
   const [stateUppComming , setStateUppComming] = useState('movie')
   const [statePopular , setStatePopular] = useState( 'movie' )
   const [stateWatchigNow , setStateWatchigNow] = useState( 'movie' )
@@ -38,6 +40,7 @@ const Home = () => {
     getDataApi(setNowPlaying, NowPlaying , 'movie' );
     getDataApi(setPopularFilmList, HomePopulyar , statePopular );
     getDataApi(setBestRatingFilm, BestRating , stateBastRating );
+    getTypeGanre( setGenres , 'movie' )
   }, [ statePopular  , stateBastRating]);
 
   useEffect(() => {
@@ -50,7 +53,7 @@ const Home = () => {
   return (
     <div className={clases.home}>
       <div className={clases.HomeSlider}>
-        <Slider dataFilms={nowPlaying.slice(0, 5)} count={5} type={'Movie'} />
+        <Slider dataFilms={nowPlaying.slice(0, 5)} count={5} type={'movie'} />
       </div>
       <div className="pt-5 flex flex-col gap-6 container">
         <HomeListFilms
@@ -58,12 +61,14 @@ const Home = () => {
           dataList={popularFilmList}
           type={statePopular}
           setDataType={setStatePopular}
+          genres={genres}
         />
         <HomeListFilms
           title={"Фильмы с выскоим рейтингом "}
           dataList={bestRatingFilm}
           type={stateBastRating}
           setDataType={setStateBastRating}
+          genres={genres}
         />
         <div ref={ref}></div>
         <HomeInfoFilms/>
@@ -72,11 +77,13 @@ const Home = () => {
           dataList={watchingNow}
           type={stateWatchigNow}
           setDataType={setStateWatchigNow}
+          genres={genres}
         />
         <HomeListFilms
           title={"Скоро на экранах"}
           dataList={uppComming.slice(10, 20)}
           type={stateUppComming}
+          genres={genres}
         />
       </div>
     </div>

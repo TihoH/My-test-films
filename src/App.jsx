@@ -11,9 +11,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route element={<ListFilms />} path="Type/:type/:id" />
-          <Route element={<ListFilms />} path="Type/:type" /> 
-          <Route element={<AboutFilm />} path="AboutFilm/Type/:type/:id" />
+          <Route element={<ListFilms />} path="type/:type/:id" />
+          <Route element={<ListFilms />} path="type/:type" /> 
+          <Route element={<AboutFilm />} path="AboutFilm/type/:type/:id" />
           <Route element={<AboutActors />} path="Info-person/:id" />
         </Route>
       </Routes>

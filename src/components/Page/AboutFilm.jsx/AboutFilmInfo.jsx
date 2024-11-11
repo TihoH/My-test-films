@@ -1,6 +1,7 @@
 import React from "react";
 import clases from "./AboutFilm.module.scss";
 import CurrentFilmVideos from "./CurrentFilmVideos";
+import AboutFilmActors from "./AboutFilmActors";
 
 const AboutFilmInfo = ({ currentFilm, dataVideo }) => {
   return (
@@ -22,8 +23,7 @@ const AboutFilmInfo = ({ currentFilm, dataVideo }) => {
           </div>
           <div className={clases.about_wrapper}>
             <div className={clases.film_about}>
-            <div>
-              
+              <div>
                 <h1 className="text-2xl ">{currentFilm?.name}</h1>
               </div>
               <div>
@@ -35,10 +35,6 @@ const AboutFilmInfo = ({ currentFilm, dataVideo }) => {
               </div>
             </div>
             <div>
-              {/* <div className="text-lg">
-                <span className="text-text-color">название</span>
-                <span> : {currentFilm.name}</span>
-              </div> */}
               <div>
                 <span className="text-text-color">ID</span>
                 <span> : {currentFilm.id}</span>
@@ -47,14 +43,16 @@ const AboutFilmInfo = ({ currentFilm, dataVideo }) => {
                 <span className="text-text-color">Дата релиза</span> :{" "}
                 <span>{currentFilm.release_date}</span>
               </div>
-              <div className="text-lg flex gap-2 flex-wrap">
-                <span className="text-text-color">Жанр </span>:
-                {currentFilm?.genres?.map((genre, index) => (
-                  <span key={index}>{genre.name}</span>
-                ))}{" "}
+              <div className="flex gap-2">
+                <ul className="listDataApi  ">
+                <li className="text-text-color">Жанр </li>:
+                  {currentFilm?.genres?.map((genre, index) => (
+                    <li key={index}>{genre.name}</li>
+                  ))}
+                </ul>
               </div>
               <ul className="text-lg flex gap-2 flex-wrap">
-                <span className="text-text-color">Страна</span> :{" "}
+              <li className="text-text-color">Страна</li> :{" "}
                 {currentFilm.origin_country
                   ? currentFilm.origin_country.map((country, index) => (
                       <li key={index}>
@@ -63,10 +61,6 @@ const AboutFilmInfo = ({ currentFilm, dataVideo }) => {
                     ))
                   : "непоняика"}
               </ul>
-              {/* <div>
-                <span className="text-text-color">Тип</span>
-                <span> : {currentFilm.type}</span>
-              </div> */}
               <div>
                 <span className="text-text-color">Продолжительность</span>
                 <span>
@@ -77,33 +71,10 @@ const AboutFilmInfo = ({ currentFilm, dataVideo }) => {
                   мин
                 </span>
               </div>
-              {/* <div>
-                <span className="text-text-color">Премьера в мире</span>
-                <span>
-                  {" "}
-                  :{" "}
-                  {currentFilm.premiere
-                    ? new Date(
-                        currentFilm?.premiere?.world
-                      ).toLocaleDateString()
-                    : "не указано"}{" "}
-                </span>
-              </div> */}
-              {/* <div>
-                <span className="text-lg mr-2 text-text-color">Возраст:</span>
-                <span>
-                  {currentFilm.ageRating
-                    ? currentFilm.ageRating + "+"
-                    : "Описание не найдено"}
-                </span>
-              </div> */}
-              <ul
-                className={`${clases.productionFilm} flex items-center flex-wrap`}
-              >
+              <ul className={`listDataApi flex items-center flex-wrap`}>
                 <h5 className="text-lg mr-2 text-text-color">Производство:</h5>
                 {currentFilm?.production_companies?.map((prodComp, index) => (
                   <li key={index} className="flex">
-                    {/* <img  src={"http://image.tmdb.org/t/p/w92/" + prodComp.logo_path} alt="" /> */}
                     <span>{prodComp.name}</span>
                   </li>
                 ))}
@@ -131,10 +102,17 @@ const AboutFilmInfo = ({ currentFilm, dataVideo }) => {
                   : "Описание не найдено"}
               </span>
             </div>
-                  {dataVideo ?  <CurrentFilmVideos
-              currentFilm={currentFilm}
-              dataVideo={dataVideo}
-            /> : ''}
+            <div className="ACTORS">
+                <AboutFilmActors /> 
+            </div>
+            {dataVideo ? (
+              <CurrentFilmVideos
+                currentFilm={currentFilm}
+                dataVideo={dataVideo}
+              />
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

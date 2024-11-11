@@ -4,7 +4,7 @@
 
 .categories_list{
     display: grid;
-    grid-template-columns: repeat( 6 , 1fr );
+    grid-template-columns: repeat( 7 , 1fr );
     width: 100%;
     gap: 10px;
     z-index: 900;
@@ -14,21 +14,26 @@
     // border: 1px solid red;
 
     li{
-        z-index: 900;
-        // height: 300px;
+        z-index: 100;
+        height: 300px;
         display: flex;
         flex-direction: column;
         padding: 3px;
         cursor: pointer;
         max-width: 100%;
         border-radius: 5px;
+        font-size: 14px;
+        
+        h2{
+            color: gray;
+        }
        
 
         img{
             height: 230px;
             // max-height: 250px;
             width: 100%;
-            object-fit: cover;
+            // object-fit: cover;
         }
         
     }
@@ -39,9 +44,17 @@
         right: -30px;
         // height: 400px;
         z-index: 1100;
-        transition: 0.5s;
         min-width: 220px;
         height: auto;
+
+        h2{
+            color: white;
+        }
+
+        img{
+            object-fit: cover;
+            height: 280px;
+        }
     }
 }
 
@@ -64,29 +77,34 @@
     border: 1px solid rgb(0, 73, 0);
 }
 .hover_styleNameEndAboutFilms{
-    // background-color: rgb(27, 27, 27);
-    min-height: 60px;
+    padding: 10px 0;
     display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // border: 1px solid rgb(5, 78, 5);
+
 }
 li:hover .hover_styleNameEndAboutFilms{
     display: flex;
-    // background-color: rgb(27, 27, 27);
     width: 100%;
     color: white;
-    // border-radius: 20px;
-    // opacity: 0;
 }
 
 
 .hover_aboutItemCategories{
     display: none;
-    // border: 1px solid gray;
 }
 
 .categories_list li:hover .hover_aboutItemCategories{
     height: 100%;
     display: block;
+    // border: 1px solid red;
 }
+// .listGanres{
+//     display: flex;
+//     flex-wrap: wrap;
+//     // border: 1px solid red;
+// }
+// .listGanres span:not(:last-child)::after{
+//     content: ',';
+//     display: block;
+//     padding: 0 5px;
+  
+//   }
