@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-} */
-
 .app-container{
   background-color: #100E19;
   color: white;
@@ -45,33 +38,15 @@
 }
 /* END НАСТРОЙКА ПАГИНАЦИИ */
 
-
-
-/* main{
-  width: 100vw;
-  left: 300px;
-  position: absolute;
-} */
-
-
-/* swiper Pagination */
-
-/* .swiper-pagination-bullet {
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    line-height: 20px;
-    font-size: 12px;
-    color: #000;
-    opacity: 1;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid red;
-    position: absolute;
-    
+/* MEDIA SCREEN */
+@media screen and (max-width: 900px) {
+  .app-container {
+    padding: 0 5px;
   }
-  
-  .swiper-pagination-bullet-active {
-    color: #fff;
-    background: #007aff;
-    border: 1px solid red;
-  }  */
+}
+
+@media screen and (max-width: 1250px) {
+  .app-container {
+    padding: 0 5px;
+  }
+}

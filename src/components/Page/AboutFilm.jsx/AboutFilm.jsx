@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router";
-import { getDataById, getDataByIdCollaction } from "../../../API/getFilms.js";
+import { getDataById } from "../../../API/getFilms.js";
 import AboutFilmInfo from "./AboutFilmInfo";
 import CurrentFilmSequel from "./CurrentFilmSequel.jsx";
 import HomeListFilms from "../Home/HomeListFilms.jsx";
@@ -11,65 +11,35 @@ import {
   getFilmRecommendation,
   getSimilyarFilm,
 } from "./../../../API/constanseApiLink.js";
-import {
-  FunctionGetData,
-  getTraillerFilm,
-  getTypeGanre,
-} from "../../../API/ApiFunctions.js";
 import AboutFilmComments from "./AboutFilmComments.jsx";
-import { useGetComments } from "../../../API/hooks/useCommentsFilm.js";
+import { useGetCollactions, useGetComments, useGetDataByID, useGetGanres, useGetVideo } from "../../../API/hooks/UseGetData.js";
 
 
 const AboutFilm = () => {
-  const [currentFilm, setCurrentFilm] = useState({});
-  const [currentFilmCollactionId, setCurrentFilmCollactionId] = useState("");
-  const [similarMovies, setSimilarMovies] = useState([]);
-  const [recommendationFilms, setRecommendationFilms] = useState([]);
-  const [collactionsFilm, setCollactionsFilm] = useState([]);
-  const [allSeasons, setAllSeasons] = useState(undefined);
-  const [dataVideo, setDataVideo] = useState([]);
-  const [genres, setGenres] = useState([]);
-  // const [actors, setActors] = useState([]);
-  const randomNum = Math.floor(Math.random() * 10);
-  const comments = useGetComments(randomNum)
   const { id, type } = useParams();
   const { pathname } = useLocation();
-
-  console
-  console.log(comments)
+  const [currentFilm, setCurrentFilm] = useState({});
+  const [currentFilmCollactionId, setCurrentFilmCollactionId] = useState('');
+  const [allSeasons, setAllSeasons] = useState(undefined);
+  const apigenres = useGetGanres()
+  const apiTrailler = useGetVideo(getFilmIdVideo, type, id)
+  const apiRecommendation = useGetDataByID( 'getRecommendation' ,id, getFilmRecommendation, type)
+  const apiSimilarMovies = useGetDataByID( 'getSimilay' , id, getSimilyarFilm, type)
+  const apiCollactions = useGetCollactions(currentFilmCollactionId , getFilmCollaction)
+  const randomNum = Math.floor(Math.random() * 10);
+  const comments = useGetComments(randomNum)
 
   const getFilm = async (id, type) => {
     const response = await getDataById(id, getFilmId, type);
     setCurrentFilm(response);
-    setCurrentFilmCollactionId(response.belongs_to_collection?.id);
+    setCurrentFilmCollactionId(response?.belongs_to_collection?.id);
     if (response.seasons) {
       setAllSeasons(response.seasons);
     }
   };
 
-  const getCollactions = async (currentFilmCollactionId, getFilmCollaction) => {
-    if (currentFilmCollactionId) {
-      const response = await getDataByIdCollaction(
-        currentFilmCollactionId,
-        getFilmCollaction
-      );
-      setCollactionsFilm(
-        // response.parts ? response.parts.sort((a, b) => a.release_date - b.release_date) : response.seasons.sort((a, b) => a.release_date - b.release_date)
-        response?.parts?.sort((a, b) => a.release_date - b.release_date)
-      );
-    }
-    return;
-  };
-
-  console.log(type)
-
   useEffect(() => {
     getFilm(id, type);
-    getTraillerFilm(setDataVideo, getFilmIdVideo, type, id);
-    getTypeGanre(setGenres, type);
-    FunctionGetData(setRecommendationFilms, id, getFilmRecommendation, type);
-    FunctionGetData(setSimilarMovies, id, getSimilyarFilm, type);
-    getCollactions(currentFilmCollactionId, getFilmCollaction);
   }, [id, currentFilmCollactionId]);
 
   useEffect(() => {
@@ -80,32 +50,32 @@ const AboutFilm = () => {
       
       <AboutFilmInfo
         currentFilm={currentFilm}
-        dataVideo={dataVideo ? dataVideo : ""}
+        dataVideo={apiTrailler}
       />
       <div className="container pt-5">
-        {similarMovies.length ? (
+        {apiSimilarMovies?.length ? (
           <HomeListFilms
             title={"Так же смотрят"}
-            dataList={similarMovies}
+            dataList={apiSimilarMovies}
             type={type}
-            genres={genres}
+            genres={apigenres.data}
           />
         ) : null}
-        {recommendationFilms.length ? (
+        {apiRecommendation?.length ? (
           <HomeListFilms
             title={"Рекомендовыные к просмотру"}
-            dataList={recommendationFilms}
+            dataList={apiRecommendation}
             type={type}
-            genres={genres}
+            genres={apigenres.data}
           />
         ) : null}
         <CurrentFilmSequel
-          currentFilmSequelArr={collactionsFilm}
+          currentFilmSequelArr={apiCollactions}
           allSeasons={allSeasons}
           currentFilm={currentFilm}
           currentFilmCollactionId={currentFilmCollactionId}
           type={type}
-          genres={genres}
+          genres={apigenres}
         />
         <AboutFilmComments comments={comments}/>
       </div>

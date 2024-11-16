@@ -7,14 +7,23 @@
     color: #76757B;
     transition: 0.3s;
     background: transparent;
+    
   
 }
 .activeHoverMenu{
     background-color: #1F1B2E;
     
 }
-.ganre{
+.headerLinks{
     display: flex;
+    gap: 10px;
+    margin-left: 20px;
+    /* flex-wrap: wrap; */
+    /* border: 1px solid red; */
+    /* width: 100%; */
+}
+.ganre{
+    display: none;
    width: 100%;
    gap: 5px;
    position: absolute;
@@ -32,10 +41,11 @@
     opacity: 1;
     z-index: 3000;
     height: 450px;
+    display: flex;
 }
 .ganre_list{
    height: 100%;
-   max-width: 200px;
+   width: 20%;
     padding: 10px;
    border-right: 1px solid gray;
    overflow-y: scroll;
@@ -46,8 +56,128 @@
   }
 .ganre_list li{
     height: 30px;
-    min-width: 150px;
+
 }
 .ganre_list li:hover{
     color: white;
 }
+
+/* START TABS */
+.headerTabs{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
+    position: relative;
+    padding: 10px;
+}
+.btnBurgerMenu{
+    display: none;
+    position: sticky;
+    top: 20px;
+}
+
+/* STYLE BTN BURGER */
+.burger {
+    position: relative;
+    border: none;
+    background: transparent;
+    width: 40px;
+    height: 26px;
+    top: 10px;
+    margin-left: 10px;
+  }
+  .burger::before,
+  .burger::after {
+    content: '';
+    left: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 10px;
+    background: #76757B;
+  }
+  .burger::before {
+    top: 0;
+    box-shadow: 0 11px 0 #76757B;
+  }
+  .burger::after {
+    bottom: 0;
+  }
+  .burger::before {
+  transition: box-shadow .3s .15s, top .3s .15s, transform .3s;
+}
+.burger::after {
+  transition: bottom .3s .15s, transform .3s;
+}
+.burger.active::before {
+  top: 11px;
+  transform: rotate(45deg);
+  box-shadow: 0 6px 0 rgba(0,0,0,0);
+  transition: box-shadow .15s, top .3s, transform .3s .15s;
+}
+.burger.active::after {
+  bottom: 11px;
+  transform: rotate(-45deg);
+  transition: bottom .3s, transform .3s .15s;
+}
+/* END STYLE BTN BURGER */
+
+/* TABS END */
+
+
+/* START MEDIA SCREEN */
+
+  @media screen and (max-width: 768px) {
+    .header{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        background-color: #100E19;
+        z-index: 1000;
+
+    }
+    .headerLinks {
+        transform: translateX(-600px);
+        position: absolute;
+        transition: 0.5s;
+     }
+    .btnBurgerMenu{
+        display: block;
+        cursor: pointer;
+        z-index: 1000;
+    }
+    .activeBurgerMenu{
+        /* display: flex; */
+        transform: translateX(0);
+        /* background-color: #1F1B2E; */
+        background-color: #100E19;
+        transition: 0.5s;
+        position: fixed;
+        height: 75px;
+        left: -20px;
+        right: 0;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+
+}
+@media screen and (max-width: 576px) {
+  .headerLinkTitle{
+    font-size: 15px;
+  }
+  .headerLinks{
+    margin-left: -30px;
+  }
+  .ganre{
+    display: none;
+  }
+}
+

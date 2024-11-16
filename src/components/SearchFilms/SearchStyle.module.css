@@ -6,6 +6,7 @@
     grid-template-columns: repeat( 6 , 1fr );
     gap: 20px;
     min-height: 100vh;
+    
 }
 
 .searchList_item{
@@ -15,7 +16,7 @@
     height: 250px;
     transition: 0.5s;
     /* color: #76756B; */
-    max-width: 100%;
+    width: 100%;
     position: relative;
     top: 0;
     left: 0;
@@ -80,4 +81,34 @@
 
 .searchList_item:hover .showInfoItemList{
     opacity: 1;
+}
+
+
+/* START MEDIA SCREEN */
+@media screen and (max-width: 992px) {
+    .search_wrapperList{
+        /* width: 100%;
+        display: grid; */
+        grid-template-columns: repeat( 5 , 1fr );
+        gap: 20px;
+        
+    }
+}
+@media screen and (max-width: 768px) {
+    .search_wrapperList{
+        /* width: 100%;
+        display: grid; */
+        grid-template-columns: repeat( 4 , 1fr );
+        gap: 10px;
+        
+    }
+}
+@media screen and (max-width: 576px) {
+    .search_wrapperList{
+        /* width: 100%;
+        display: grid; */
+        grid-template-columns: repeat( 3 , 1fr );
+        gap: 10px;
+        
+    }
 }

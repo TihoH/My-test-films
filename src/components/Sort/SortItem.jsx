@@ -24,9 +24,6 @@ const SortItem = ({ title, dataSort , typeSort , setData , sortRating}) => {
                 ''
               }
               to={ typeSort != 'yaers' ? `/type/${typeSort}/` + data.id : '' }
-              // to={
-              //   typeSort === "categories" ? `/CurrentCategories/${type}/${data.name}` : null
-              // }
             >
               <li className="flex w-full justify-between items-center">
                 <span>{data.name}</span>
