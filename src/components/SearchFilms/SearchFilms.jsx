@@ -55,7 +55,6 @@ const SearchFilms = ({ setIsActiveModal }) => {
               dataButton={[
                 { title: "Фильмы", id: 1, type: "movie" },
                 { title: "Сериалы", id: 2, type: "tv" },
-                { title: "Мультфильмы", id: 3, type: "мультики" },
               ]}
               setCurrentTypeSearch={setCurrentTypeSearch}
               currentTypeSearch={currentTypeSearch}

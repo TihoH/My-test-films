@@ -1,8 +1,20 @@
 import React from "react";
 import clases from "./Header.module.css";
 import { NavLink } from "react-router-dom";
+import HeaderTabs from "./HeaderTabs";
+import { useGetDataApi, useGetGanres } from "../../API/hooks/UseGetData";
+import { BestRating, HomePopulyar } from "../../API/constanseApiLink";
 
-const Films = ({ ganre, isActiveHoverMenu, setIsActiveHoverMenu  , typeLink }) => {
+const Films = ({
+  ganre,
+  isActiveHoverMenu,
+  setIsActiveHoverMenu,
+  typeLink,
+  headerTabsByHoverMenuFilms,
+}) => {
+  const apiGetPopular = useGetDataApi("getPopular", HomePopulyar, "movie");
+  const apiBestRating = useGetDataApi("getBestRating", BestRating, "movie");
+  const apiGenres = useGetGanres("movie");
   return (
     <div
       className={
@@ -23,9 +35,12 @@ const Films = ({ ganre, isActiveHoverMenu, setIsActiveHoverMenu  , typeLink }) =
           </NavLink>
         ))}
       </ul>
-      <div className="ml-4 text-xl">
-        <h2 className="text-white">Производство</h2>
-      </div>
+      <HeaderTabs
+        headerTabsByHoverMenuFilms={headerTabsByHoverMenuFilms}
+        apiGetPopular={apiGetPopular}
+        apiGenres={apiGenres}
+        apiBestRating={apiBestRating}
+      />
     </div>
   );
 };

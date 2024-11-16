@@ -1,81 +1,132 @@
-.AppCategories{
-    min-height: 600px;
+.AppCategories {
+  min-height: 600px;
 }
 
-.categories_list{
-    display: grid;
-    grid-template-columns: repeat( 7 , 1fr );
-    width: 100%;
-    gap: 10px;
+.categories_list {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  gap: 10px;
+  z-index: 500;
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 70px;
+  // border: 1px solid red;
+
+  li {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    cursor: pointer;
+    max-width: 100%;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 100;
+
+    h2 {
+      color: gray;
+    }
+
+    img {
+      height: 230px;
+      // max-height: 250px;
+      width: 100%;
+      // object-fit: cover;
+    }
+    
+  }
+  li:hover {
+    position: absolute;
+    top: -10px;
+    left: -18px;
+    right: -30px;
+    // height: 400px;
     z-index: 900;
-    position: relative;
-    margin-top: 20px;
-    margin-bottom: 70px;
-    // border: 1px solid red;
+    min-width: 220px;
+    height: auto;
 
-    li{
-        z-index: 100;
-        height: 300px;
-        display: flex;
-        flex-direction: column;
-        padding: 3px;
-        cursor: pointer;
-        max-width: 100%;
-        border-radius: 5px;
-        font-size: 14px;
-        
-        h2{
-            color: gray;
-        }
-       
-
-        img{
-            height: 230px;
-            // max-height: 250px;
-            width: 100%;
-            // object-fit: cover;
-        }
-        
+    h2 {
+      color: white;
     }
-    li:hover{
-        position: absolute;
-        top: -10px;
-        left: -18px;
-        right: -30px;
-        // height: 400px;
-        z-index: 1100;
-        min-width: 220px;
-        height: auto;
 
-        h2{
-            color: white;
-        }
-
-        img{
-            object-fit: cover;
-            height: 280px;
-        }
+    img {
+      object-fit: cover;
+      height: 280px;
     }
+  }
 }
+<<<<<<< HEAD
 .categories_list li:hover{
     box-shadow: 0 0 3px white;
     padding: 10px;
     background-color: #100E19;
-}
-.wrapper_categories_filter{
-    width: 100%;
-    background-color: #302A44;
-    border-radius: 4px;
-    padding: 15px;
-    display: flex ;
-    gap: 20px;
-    border: 1px solid rgb(0, 73, 0);
-}
-.hover_styleNameEndAboutFilms{
-    padding: 10px 0;
-    display: flex;
+=======
 
+// .categories_photo{
+//     height: 80%;
+//     width: 100%;
+// }
+.categories_list li:hover {
+  box-shadow: 0 0 3px white;
+  padding: 10px;
+  background-color: #100e19;
+>>>>>>> main
 }
+.wrapper_categories_filter {
+  width: 100%;
+  background-color: #302a44;
+  border-radius: 4px;
+  padding: 15px;
+  display: flex;
+  gap: 20px;
+  border: 1px solid rgb(0, 73, 0);
+}
+.hover_styleNameEndAboutFilms {
+  padding: 10px 0;
+  display: flex;
+}
+li:hover .hover_styleNameEndAboutFilms {
+  display: flex;
+  width: 100%;
+  color: white;
+}
+
+.hover_aboutItemCategories {
+  display: none;
+}
+
+.categories_list li:hover .hover_aboutItemCategories {
+  height: 100%;
+  display: block;
+}
+
+// START MEDIA SCREEN
+@media screen and (max-width: 900px) {
+  .categories_list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media screen and (max-width: 768px) {
+  .categories_list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 576px) {
+  .categories_list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 0;
+  }
+  .wrapper_categories_filter{
+    display: flex;
+    flex-direction: column;
+
+  }
+}
+<<<<<<< HEAD
 li:hover .hover_styleNameEndAboutFilms{
     display: flex;
     width: 100%;
@@ -91,3 +142,5 @@ li:hover .hover_styleNameEndAboutFilms{
     height: 100%;
     display: block;
 }
+=======
+>>>>>>> main

@@ -4,20 +4,20 @@ import { getCategories, getGenre, key } from "../../../API/getFilms";
 import clases from "./ListFilms.module.scss";
 import { NavLink } from "react-router-dom";
 import SortItem from "../../Sort/SortItem";
-import { getTypeGanre, sortNameganresItem } from "../../../API/ApiFunctions";
+import {  sortNameganresItem } from "../../../API/ApiFunctions";
 import { sliceData } from "../../../API/functionByApi";
 
 import Pagonation from "../../UI/Pagination/Pagination";
+import { useGetGanres } from "../../../API/hooks/UseGetData";
 
 const CurrentCategories = () => {
   const { type, id } = useParams();
   const [filmsCategory, setFilmsCategory] = useState([]);
   const [pageFilms, setPageFilms] = useState(1);
-  const [genreSortData, setGenreSortData] = useState([]);
   const [defaultYaer, setDefaultYaer] = useState(undefined);
   const [sortRating, setSortRating] = useState({ name: "", sort: "" });
-  const [genres, setGenres] = useState([]);
   const [totalPages , setTotalPages] = useState() 
+  const apiGenres = useGetGanres(type)
 
   const getCategoriesFilms = async (id, pageFilms, type, defaultYaer) => {
     const response = await getCategories(id, pageFilms, type, defaultYaer);
@@ -26,11 +26,9 @@ const CurrentCategories = () => {
     console.log(totalPages)
   };
 
-
-
   function sortNameGanre(id) {
     if (id) {
-      const sortName = genreSortData?.find((item) =>
+      const sortName = apiGenres.data?.find((item) =>
         item.id === Number(id) ? item : null
       );
       return sortName;
@@ -48,19 +46,17 @@ const CurrentCategories = () => {
 
   useEffect(() => {
     getCategoriesFilms(id, pageFilms, type, defaultYaer);
-    getTypeGanre(setGenreSortData, type);
-    getTypeGanre(setGenres, type);
   }, [id, pageFilms, type, defaultYaer]);
   return (
     <div
       className={`w-full flex flex-col h-full justify-between ${clases.AppCategories}`}
     >
       <div>
-        <h1 className="text-3xl my-4 ">{type} смотреть онлайн</h1>
+        <h1 className="text-3xl my-4 ">{ type === 'movie' ? 'Фильмы' : type } смотреть онлайн</h1>
         <div className={clases.wrapper_categories_filter}>
           <SortItem
             title={sortNameGanre(id)}
-            dataSort={genreSortData}
+            dataSort={apiGenres.data}
             typeSort={type}
           />
           <SortItem
@@ -115,7 +111,7 @@ const CurrentCategories = () => {
                     Жанр{" "}
                   </span>
                   :
-                  {sortNameganresItem(item.genre_ids, genres)?.map(
+                  {sortNameganresItem(item.genre_ids, apiGenres.data)?.map(
                     (genre, index) => (
                       <span key={index}>{genre},</span>
                     )

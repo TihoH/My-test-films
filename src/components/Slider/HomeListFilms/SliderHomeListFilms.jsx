@@ -11,19 +11,14 @@ import { Pagination } from "swiper/modules";
 import { NavLink } from "react-router-dom";
 import { sortNameganresItem } from "../../../API/ApiFunctions";
 
-const SliderHomeListFilms = ({ dataList, genres, swiperref , type}) => {
-  console.log(type)
+const SliderHomeListFilms = ({ dataList, genres, swiperref, type }) => {
   return (
     <>
       <Swiper
         modules={[Pagination, Navigation]}
         slidesPerView={1}
         spaceBetween={10}
-        // navigation={true}
-        // loop = {true}
-
         onSwiper={(swiper) => (swiperref.current = swiper)}
-        // pagination={{ clickable: true }}
         className={`${clases.swiper}`}
         breakpoints={{
           "@0.00": {
@@ -44,7 +39,7 @@ const SliderHomeListFilms = ({ dataList, genres, swiperref , type}) => {
           },
         }}
       >
-        {dataList.map((itemList, index) => (
+        {dataList?.map((itemList, index) => (
           <SwiperSlide
             key={index}
             className={
@@ -52,36 +47,43 @@ const SliderHomeListFilms = ({ dataList, genres, swiperref , type}) => {
             }
           >
             <NavLink
-              to={`/AboutFilm/type/${type === 'tv' || type === 'Tv-serials' ? 'Tv-serials' : 'movie'}/` + itemList.id}
+              to={
+                `/AboutFilm/type/${
+                  type === "tv" || type === "Tv-serials"
+                    ? "Tv-serials"
+                    : "movie"
+                }/` + itemList.id
+              }
               className="h-full"
             >
               <div className={clases.swiper_images}>
-                <img
-                  src={
-                    "https://image.tmdb.org/t/p/w500/" + itemList.poster_path
-                  }
-                  alt=""
-                />
-              </div>
-              <div className={clases.swiperSlide_hoverAbout}>
-                <div className={`${clases.swiper_about} text-center `}>
-         
-                  <span>{itemList.name || itemList.title}</span>
-                </div>
-                <div className={clases.swiper_about}>
-                  <span className="text-text-color">Год:</span>
-                  <span> {itemList.release_date}</span>
-                </div>
+                <div className="relative">
+                  <img
+                    src={
+                      "https://image.tmdb.org/t/p/w500/" + itemList.poster_path
+                    }
+                    alt=""
+                  />
+                  <div className={clases.swiperSlide_hoverAbout}>
+                    <div className={`${clases.swiper_about} text-center `}>
+                      <span>{itemList.name || itemList.title}</span>
+                    </div>
+                    <div className={clases.swiper_about}>
+                      <span className="text-text-color">Год:</span>
+                      <span> {itemList.release_date}</span>
+                    </div>
 
-                <div className="flex gap-1">
-                  <ul className="listDataApi  flex-wrap ">
-                  <li className={` text-text-color`}>Жанр:</li>
-                    {sortNameganresItem(itemList.genre_ids, genres)?.map(
-                      (genre, index) => (
-                        <li key={index}>{genre}</li>
-                      )
-                    )}{" "}
-                  </ul>
+                    <div className="flex gap-1">
+                      <ul className="listDataApi  flex-wrap ">
+                        <li className={` text-text-color`}>Жанр:</li>
+                        {sortNameganresItem(itemList.genre_ids, genres)?.map(
+                          (genre, index) => (
+                            <li key={index}>{genre}</li>
+                          )
+                        )}{" "}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </NavLink>

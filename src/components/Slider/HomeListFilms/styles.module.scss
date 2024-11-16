@@ -1,40 +1,31 @@
 .swiper {
   // width: 100%;
   // max-width: 1200px;
-  // position: relative;
-  max-height: 350px;
+  position: relative;
+  // max-width: 400px;
+  height: 30%;
   z-index: 50;
   padding: 10px 3px;
   // overflow-y: inherit;
-  // border: 1px solid red;
+  // border: 1px solid blue;
+  max-width: 100%;
 }
 .SwiperSlide {
-//  text-align: center; 
-  font-size: 14px;
-  // display: flex;
-  // justify-content: flex-start;
   flex-direction: column;
-  // justify-content: flex-start;
-  // height: 100%;
+  max-height: 80%;
   position: relative;
-  background-color: #100E19;
-}
-
-.SwiperSlideSkeleton{
-  height: 100%;
-  width: 100%;
 }
 .SwiperSlide:hover .swiperSlide_hoverAbout{
   opacity: 1;
   cursor: pointer;
   box-shadow: 0 0 3px white;
-  // z-index: 1000;
   position: absolute;
-  // pointer-events: all;
-  // height: 300px;
   color: white;
   transition: 0.5s;
   padding:  5px 5px;
+}
+.SwiperSlide h2{
+  font-size: 14px;
 }
 .SwiperSlide:hover h2{
   color: white;
@@ -50,11 +41,12 @@
   background-color: rgba(20,17,28 , 0.7);
   color: white;
   opacity: 0;
-  height: 280px;
+  height: 100%;
+  font-size: 14px;
   
 }
 
 .swiper_images{
-  height: 280px;
+  height: 80%;
   width: 100%;
 }

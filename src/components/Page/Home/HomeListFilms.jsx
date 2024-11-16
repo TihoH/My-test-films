@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import SliderHomeListFilms from "../../Slider/HomeListFilms/SliderHomeListFilms";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import clases from "./Home.module.scss";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { HiArrowLongLeft, HiArrowLongRight } from "react-icons/hi2";
 import { useLocation, useParams } from "react-router";
@@ -12,7 +14,7 @@ const HomeListFilms = ({ title, dataList, type, setDataType, genres }) => {
   const { id } = useParams();
 
   return (
-    <div className="">
+    <div className={clases.homeListFils_wrapper}>
       <div
         className={
           location.pathname === `/AboutFilm/type/${type}/${id ? id : ""}`
@@ -20,7 +22,7 @@ const HomeListFilms = ({ title, dataList, type, setDataType, genres }) => {
             : ""
         }
       >
-        <h2 className="text-3xl mb-1 relative">{title}</h2>
+        <h2 className="text-xl md:text-3xl mb-3 relative">{title}</h2>
         <div className="flex items-center justify-between">
           <div className="flex justify-between items-center">
             {setDataType ? (
@@ -44,7 +46,7 @@ const HomeListFilms = ({ title, dataList, type, setDataType, genres }) => {
               ""
             )}
           </div>
-          <div>
+          <div className="flex">
             <Button
               swiperref={swiperref}
               onClick={() => swiperref.current?.slidePrev()}

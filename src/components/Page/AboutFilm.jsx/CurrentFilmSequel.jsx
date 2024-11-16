@@ -11,12 +11,12 @@ const CurrentFilmSequel = ({
   type,
   allSeasons,
 }) => {
-  const [okTypeLink , setOkTypeLink] = useState(false)
+  const [okTypeLink, setOkTypeLink] = useState(false);
 
-  if(!currentFilmCollactionId && allSeasons == undefined ){
-    return
+  if (!currentFilmCollactionId && allSeasons == undefined) {
+    return;
   }
-  
+
   function sortTypeSiquel(type, allSeasons) {
     if (type === "movie") {
       return currentFilmSequelArr;
@@ -24,29 +24,32 @@ const CurrentFilmSequel = ({
     return allSeasons;
   }
 
-  function sortType(type , id){
-    if(type === 'tv' || type === 'Tv-serials'){
-
-      return ''
-    }else{
-      return `/AboutFilm/type/${type}/` + id
+  function sortType(type, id) {
+    if (type === "tv" || type === "Tv-serials") {
+      return "";
+    } else {
+      return `/AboutFilm/type/${type}/` + id;
     }
   }
   const showErrorLinkSiquel = () => {
-    if(type === 'tv' || type === 'Tv-serials'){
-      setOkTypeLink(true)
-      setTimeout( () => {
-        setOkTypeLink(false)
-      } , [5000] )
+    if (type === "tv" || type === "Tv-serials") {
+      setOkTypeLink(true);
+      setTimeout(() => {
+        setOkTypeLink(false);
+      }, [5000]);
     }
-  }
+  };
   return (
     <div className={clases.CurrentFilm_sequel_wrapper}>
       <h3 className="text-3xl"> Все части фильма </h3>
       <div className="">
         <ul className={` mt-2 ${clases.CurrentFilm_sequel_wrapperList}`}>
           {sortTypeSiquel(type, allSeasons)?.map((item, index) => (
-            <NavLink key={index} to={ sortType(type , item.id) } onClick={ () => showErrorLinkSiquel() } >
+            <NavLink
+              key={index}
+              to={sortType(type, item.id)}
+              onClick={() => showErrorLinkSiquel()}
+            >
               <li className={"w-full py-1"}>
                 {currentFilmCollactionId != item.id ? (
                   <img
@@ -75,17 +78,25 @@ const CurrentFilmSequel = ({
                   </div>
                   <div>
                     Год:{" "}
-                    {item.release_date || item?.air_date? sliceData(item?.release_date || item?.air_date ) : ''}
+                    {item.release_date || item?.air_date
+                      ? sliceData(item?.release_date || item?.air_date)
+                      : ""}
                   </div>
                 </div>
               </li>
             </NavLink>
           ))}
         </ul>
-          {okTypeLink ?         <div className={clases.CurrentFilm_sequel_ShowErorLink}>
-                    <h5>Возникла проблема с данными API</h5>
-                    <p className="text-sm">Нет возможности произвести переход на дуругой сезон </p>
-                </div> : ''}
+        {okTypeLink ? (
+          <div className={clases.CurrentFilm_sequel_ShowErorLink}>
+            <h5>Возникла проблема с данными API</h5>
+            <p className="text-sm">
+              Нет возможности произвести переход на дуругой сезон{" "}
+            </p>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

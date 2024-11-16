@@ -6,16 +6,15 @@ import Films from "./Films";
 import clases from "./Header.module.css";
 import Modal from "../ModalWindow/Modal";
 import SearchFilms from "../SearchFilms/SearchFilms";
-import { getTypeGanre } from "../../API/ApiFunctions";
-import { useGetGanres } from "../../API/hooks/useGetGanre";
+import { useGetGanres } from "../../API/hooks/UseGetData";
 
 const Header = () => {
   const [isActiveHoverMenu, setIsActiveHoverMenu] = useState(false);
-  // const [ganre, setGenre] = useState([]);
   const [isActiveModal, setIsActiveModal] = useState(false);
   const [typeLink, setTypeLink] = useState("");
+  const [activeBurgetMenu, setActiveBurgerMenu] = useState(false);
   const { type } = useParams();
-  const {data} = useGetGanres(type)  
+  const apiGenres = useGetGanres(type);
   const headerLinks = [
     {
       title: "Главная",
@@ -47,10 +46,11 @@ const Header = () => {
       onMouseMove: () => setIsActiveHoverMenu(false),
     },
   ];
-
-  // useEffect(() => {
-  //   getTypeGanre(setGenre, "movie");
-  // }, []);
+  const headerTabsByHoverMenuFilms = [
+    { title: "Популярные", id: 1 },
+    { title: "Высокий рейтинг", id: 2 },
+    { title: "3", id: 3 },
+  ];
 
   return (
     <div
@@ -61,12 +61,19 @@ const Header = () => {
       }
       onMouseLeave={() => setIsActiveHoverMenu(false)}
     >
-      <div className="flex items-center w-1/2 ">
-        <NavLink to={"/"} className="flex text-3xl">
+      <div className="flex items-center">
+        <NavLink to={"/"} className="sm:text-3xl flex text-xl">
           <span className="font-thin text-red-400">My</span>
           <span className="font-semibold -rotate-12 text-white">Logo1</span>
         </NavLink>
-        <ul className="flex gap-3 ml-5">
+        {/* activeBurgerMenu */}
+        <ul
+          className={
+            activeBurgetMenu
+              ? `${clases.headerLinks} ${clases.activeBurgerMenu}`
+              : `${clases.headerLinks}`
+          }
+        >
           {headerLinks.map((hedaerLink, index) => (
             <NavLink
               key={index}
@@ -89,13 +96,13 @@ const Header = () => {
                     : () => setIsActiveHoverMenu(false)
                 }
               >
-                <span>{hedaerLink.title}</span>
+                <span className={clases.headerLinkTitle}>{hedaerLink.title}</span>
               </li>
             </NavLink>
           ))}
         </ul>
       </div>
-      <div className="flex items-center justify-end w-1/2 gap-6">
+      <div className="flex items-center">
         <div className="flex text-lg">
           <button
             type="button"
@@ -103,13 +110,15 @@ const Header = () => {
             className={
               "flex items-center transition hover:text-white relative mx-5"
             }
+            onClick={() => setIsActiveModal(true)}
           >
             <span>
               <IoIosSearch className="absolute -left-8 top-2 text-2xl" />
             </span>
+       
             <span
               className=" font-semibold"
-              onClick={() => setIsActiveModal(true)}
+             
             >
               поиск
             </span>
@@ -120,18 +129,26 @@ const Header = () => {
             </span>
             <span className="text-sm font-semibold  text-gray-300 ">Войти</span>
           </div>
+          <div
+            className={clases.btnBurgerMenu}
+            onClick={() => setActiveBurgerMenu(!activeBurgetMenu)}
+          >
+            <button class={clases.burger}></button>
+          </div>
         </div>
       </div>
-      <div>
-        <Films
-          ganre={data}
-          isActiveHoverMenu={isActiveHoverMenu}
-          setIsActiveHoverMenu={setIsActiveHoverMenu}
-          typeLink={typeLink}
-        />
-      </div>
+      <Films
+        ganre={apiGenres.data}
+        isActiveHoverMenu={isActiveHoverMenu}
+        setIsActiveHoverMenu={setIsActiveHoverMenu}
+        typeLink={typeLink}
+        headerTabsByHoverMenuFilms={headerTabsByHoverMenuFilms}
+      />
       <Modal setIsActiveModal={setIsActiveModal} isActiveModal={isActiveModal}>
-        <SearchFilms isActiveModal={isActiveModal} setIsActiveModal={setIsActiveModal} />
+        <SearchFilms
+          isActiveModal={isActiveModal}
+          setIsActiveModal={setIsActiveModal}
+        />
       </Modal>
     </div>
   );

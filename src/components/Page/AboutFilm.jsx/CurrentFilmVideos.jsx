@@ -8,9 +8,6 @@ const CurrentFilmVideos = ({ dataVideo }) => {
       <h3 className="text-3xl mt-3 mb-3"> Трейлер</h3>
       <iframe
         className={clases.aboutFilm_iframe}
-        // width="560"
-        // height="315"
-        // src="https://www.youtube.com/embed/yVzqz_zpP20?si=t61_ZjhHqoj5qfxT"
         src={`https://www.youtube.com/embed/` + dataVideo.key}
         title="YouTube video player"
         frameBorder="0"
